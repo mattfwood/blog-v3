@@ -8,6 +8,9 @@ import { postFilePaths, POSTS_PATH } from '../utils/mdxUtils';
 import { Box, Heading, Stack, Text } from 'minerva-ui';
 
 export default function Index({ posts }) {
+  const sortedPosts = posts.sort((a, b) => {
+    return new Date(b.data.date) - new Date(a.data.date)
+  });
   return (
     <Layout>
       <Heading
@@ -36,19 +39,20 @@ export default function Index({ posts }) {
         </Text>
       </Stack>
       <Box mt="32px">
-        {posts.map((post) => {
-          // console.log({ post })
+        {sortedPosts.map((post) => {
+          console.log({ post })
           return (
             <Link
               as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
               href={`/posts/[slug]`}
               key={post.filePath}
+              passHref
             >
-              <Box as="a" mb="25px" cursor="pointer">
+              <Box display="block" as="a" mb="32px" cursor="pointer">
                 <Heading as="h3" mb="8px">
                   {post.data.title}
                 </Heading>
-                <Text color="rgb(160, 174, 192)">{post.data.description}</Text>
+                <Text color="rgb(160, 174, 192)">{post.data?.description || post?.data?.spoiler}</Text>
               </Box>
             </Link>
           );

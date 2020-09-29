@@ -46,8 +46,8 @@ const GlobalStyle = createGlobalStyle`
   .wrapper {
     max-width: 700px;
     margin: 0 auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   [data-name='live-editor'] textarea, [data-name='live-editor'] pre {

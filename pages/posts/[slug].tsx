@@ -11,7 +11,7 @@ import Code from '../../components/Code';
 // import CustomLink from '../../components/CustomLink';
 import Layout from '../../components/Layout';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
-import { Text } from 'minerva-ui';
+import { Heading, Text } from 'minerva-ui';
 
 const readingTime = require('reading-time');
 
@@ -27,7 +27,6 @@ const components = {
   Head,
   pre: (preProps) => {
     const props = preToCodeBlock(preProps);
-    // console.log({ props });
     return <Code {...props} />;
   },
 };
@@ -38,13 +37,13 @@ export default function PostPage({ source, frontMatter, readTime }) {
   return (
     <Layout>
       <div className="post-header">
-        <h1
-          style={{
-            lineHeight: 1.25,
-          }}
+        <Heading
+          as="h1"
+          lineHeight={1.25}
+          fontWeight={700}
         >
           {frontMatter.title}
-        </h1>
+        </Heading>
         {frontMatter.description && (
           <p className="description">{frontMatter.description}</p>
         )}

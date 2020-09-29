@@ -1,0 +1,61 @@
+---
+title: How to Call React Code from Outside React
+date: '2019-12-18'
+tags:
+  - Programming
+  - React
+
+---
+
+As you start writing more in React, it's easy to lose sight of how to do things "outside" of React.
+
+For example, if you had a React modal prompting the user to log in, but you wanted to be able to "trigger" that modal from some separate Javascript (maybe from a script tag added by an outside source), how would you do that?
+
+You might get caught up in a React-sounding solution:
+
+```jsx
+function App() {
+  function openModal() {
+    // ...other code to open modal
+  }
+
+  useEffect(() => {
+    // whenever openModal changes, you can bind it to the window?
+    window.openModal = openModal;
+  }, [openModal])
+
+  // ... rest of the component
+}
+```
+
+And while this might work in some simpler cases, we're putting a function in the global scope and it's likely that we'll run into bugs if certain things change.
+
+Instead, we should reach for a Javascript feature designed for situations like this: [Custom Events](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events).
+
+---
+
+When breaking down this problem, there are two main parts:
+- We want our app to "listen" and respond to an outside event
+- Code outside our app must be able to "trigger" this listener
+
+If this sounds familiar, it's because we use the same [Observer Pattern](https://en.wikipedia.org/wiki/Observer_pattern) for HTML elements:
+
+```html
+<body>
+  <button>Alert!</button>
+  <script>
+    const button = document.querySelector('#button');
+
+    // we add our listener here, and the "click" event is our trigger
+    button.addEventListener('click', () => {
+      // when the even is triggered, we run this code
+      alert('Button Clicked!');
+    });
+  </script>
+</body>
+```
+
+
+
+
+https://codesandbox.io/s/custom-events-m95t5?view=split&fontsize=12

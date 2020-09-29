@@ -61,8 +61,6 @@ function getParams(className = ``): [Language, any] {
       return merged;
     }, {})
 
-  console.log(parsedParams)
-
   return [
     // @ts-ignore
     lang.split(`language-`).pop().split(`{`).shift(),
