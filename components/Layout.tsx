@@ -51,10 +51,6 @@ const GlobalStyle = createGlobalStyle`
     padding-right: 1.5rem;
   }
 
-  [data-name='live-editor'] textarea, [data-name='live-editor'] pre {
-    padding: 1rem !important;
-  }
-
   .prism-code {
     font-size: 1rem;
     padding: 2rem 1rem 1rem 1rem;
@@ -79,7 +75,7 @@ const GlobalStyle = createGlobalStyle`
     position: relative;
   }
 
-  .token-line {
+  .code-highlight .token-line {
     color: rgb(214, 222, 235);
     margin-left: -1rem;
     margin-right: -1rem;
@@ -113,7 +109,7 @@ const GlobalStyle = createGlobalStyle`
     left: -2px;
   }
 
-  .token-line {
+  .code-highlight  .token-line {
     margin-left: -1rem;
     margin-right: -1rem;
     min-width: 100%;

@@ -173,7 +173,7 @@ const Code = ({
               {title}
             </Box>
           )}
-          <div data-language={language} style={{ position: 'relative', marginBottom: '32px' }}>
+          <div className="code-highlight" data-language={language} style={{ position: 'relative', marginBottom: '32px' }}>
             <pre
               className={className}
               style={style}
