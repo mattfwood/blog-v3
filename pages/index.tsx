@@ -9,7 +9,7 @@ import { Box, Heading, Stack, Text } from 'minerva-ui';
 
 export default function Index({ posts }) {
   const sortedPosts = posts.sort((a, b) => {
-    return new Date(b.data.date) - new Date(a.data.date)
+    return Number(new Date(b.data.date)) - Number(new Date(a.data.date))
   });
   return (
     <Layout>
