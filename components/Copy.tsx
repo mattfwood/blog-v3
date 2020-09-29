@@ -1,3 +1,4 @@
+import { Button } from 'minerva-ui';
 import React, { useState } from 'react';
 
 const copyToClipboard = (str: string) => {
@@ -52,14 +53,23 @@ const Copy = ({
     : `${fileName ? `${fileName}: ` : ``}copy code to clipboard`;
 
   return (
-    <button
+    <Button
       type="button"
+      position="absolute"
+      bg="rgba(159, 122, 234, 0.2)"
+      top="0px"
+      right="0px"
+      borderRadius="0px 0px 0px 0.25rem"
+      fontWeight={300}
+      padding="0.25rem 0.6rem"
+      color="white"
+      border={0}
+      _hover={{
+        backgroundColor: '#9f7aea'
+      }}
       name={label}
       disabled={copied}
       className="code-copy-button"
-      // sx={{
-      //   variant: `copyButton`,
-      // }}
       onClick={async () => {
         await copyToClipboard(trim ? content.trim() : content);
         setCopied(true);
@@ -68,8 +78,8 @@ const Copy = ({
       }}
     >
       {copied ? `Copied` : `Copy`}
-      <span aria-roledescription="status">{label}</span>
-    </button>
+      {/* <span aria-roledescription="status">{label}</span> */}
+    </Button>
   );
 };
 

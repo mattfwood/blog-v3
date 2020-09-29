@@ -96,6 +96,72 @@ const GlobalStyle = createGlobalStyle`
   .description {
     opacity: 0.6;
   }
+
+  .line-number-style {
+    font-family: Menlo, monospace;
+    display: inline-block;
+    width: 3em;
+    user-select: none;
+    opacity: 0.3;
+    text-align: center;
+    position: relative;
+  }
+
+  .highlight-line .line-number-style {
+    width: calc(3em - 4px);
+    opacity: 0.5;
+    left: -2px;
+  }
+
+  .token-line {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    min-width: 100%;
+    padding-right: 1rem;
+  }
+
+  .highlight-line {
+    border-left: 4px solid rgb(2, 155, 206);
+    background-color: rgb(2, 55, 81);
+  }
+
+  pre[class*="language-"]::before {
+    background-color: #fff;
+    border-radius: 0px 0px 0.25rem 0.25rem;
+    color: #000;
+    font-size: 12px;
+    letter-spacing: 0.025rem;
+    padding: 0.1rem 0.5rem;
+    position: absolute;
+    left: 1rem;
+    text-align: right;
+    text-transform: uppercase;
+    top: 0px;
+    font-family: monospace;
+  }
+
+  pre[class~="language-jsx"]::before {
+    content: "jsx";
+    background: rgb(97, 218, 251);
+    color: #000;
+  }
+
+  pre[class~="language-javascript"]::before, pre[class~="language-js"]::before {
+    content: "js";
+    background: rgb(247, 223, 30);
+    color: #000;
+  }
+
+  [data-name="live-preview"], [data-name="live-editor"] {
+    font-size: 1.25rem;
+  }
+
+  [data-name="live-editor"] textarea, [data-name="live-editor"] pre {
+    padding-top: 16px !important;
+    padding-right: 16px !important;
+    padding-bottom: 16px !important;
+    padding-left: 16px !important;
+  }
 `;
 
 const NavLink = ({ children, href, ...props }) => (

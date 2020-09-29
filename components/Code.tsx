@@ -4,6 +4,8 @@ import loadable from '@loadable/component';
 import theme from 'prism-react-renderer/themes/nightOwl';
 
 import Copy from './Copy';
+import { Box, styled, ThemeProvider } from 'minerva-ui';
+import { customTheme } from '../pages/_app';
 
 export type Language =
   | "markup"
@@ -86,6 +88,34 @@ const calculateLinesToHighlight = (meta: string) => {
   };
 };
 
+const PreviewStyles = styled.div`
+  padding: 18px;
+  background-color: #fff;
+
+  button {
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    color: rgb(55, 65, 81);
+    font-weight: 500;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    user-select: none;
+    position: relative;
+    white-space: nowrap;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(210, 214, 220);
+    border-width: 1px;
+  }
+`;
+
 const LazyLiveProvider = loadable(async () => {
   const Module = await import(`react-live`);
   const { LiveProvider, LiveEditor, LiveError, LivePreview } = Module;
@@ -94,7 +124,9 @@ const LazyLiveProvider = loadable(async () => {
       {props.showCopyButton && <Copy content={props.code} />}
       <LiveEditor data-name="live-editor" />
       <LiveError />
-      <LivePreview data-name="live-preview" />
+      <PreviewStyles>
+        <LivePreview data-name="live-preview" />
+      </PreviewStyles>
     </LiveProvider>
   );
 });
@@ -127,6 +159,7 @@ const Code = ({
     );
   }
   return (
+    <ThemeProvider theme={customTheme}>
     <Highlight
       {...defaultProps}
       code={codeString}
@@ -136,11 +169,11 @@ const Code = ({
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <React.Fragment>
           {title && (
-            <div className="code-title">
-              <div>{title}</div>
-            </div>
+            <Box padding="8px 16px" bg="rgb(130, 170, 255)" fontFamily={`Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`}>
+              {title}
+            </Box>
           )}
-          <div data-language={language}>
+          <div data-language={language} style={{ position: 'relative', marginBottom: '32px' }}>
             <pre
               className={className}
               style={style}
@@ -171,7 +204,8 @@ const Code = ({
           </div>
         </React.Fragment>
       )}
-    </Highlight>
+      </Highlight>
+      </ThemeProvider>
   );
 };
 

@@ -3,7 +3,7 @@ import { MinervaTheme } from 'minerva-ui/dist/theme';
 import { DefaultSeo } from 'next-seo';
 import SEO from '../next-seo.config';
 
-const customTheme: MinervaTheme = {
+export const customTheme: MinervaTheme = {
   ...defaultTheme,
   Text: {
     color: 'rgb(255, 255, 255)',
