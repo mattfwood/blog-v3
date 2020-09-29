@@ -1,49 +1,55 @@
-import React, { useState } from "react"
+import React, { useState } from 'react';
 
 const copyToClipboard = (str: string) => {
-  const { clipboard } = window.navigator
+  const { clipboard } = window.navigator;
   /*
    * fallback to older browsers (including Safari)
    * if clipboard API is not supported
    */
   if (!clipboard || typeof clipboard.writeText !== `function`) {
-    const textarea = document.createElement(`textarea`)
-    textarea.value = str
-    textarea.setAttribute(`readonly`, `true`)
-    textarea.setAttribute(`contenteditable`, `true`)
-    textarea.style.position = `absolute`
-    textarea.style.left = `-9999px`
-    document.body.appendChild(textarea)
-    textarea.select()
-    const range = document.createRange()
-    const sel = window.getSelection()
-    sel?.removeAllRanges()
-    sel?.addRange(range)
-    textarea.setSelectionRange(0, textarea.value.length)
-    document.execCommand(`copy`)
-    document.body.removeChild(textarea)
+    const textarea = document.createElement(`textarea`);
+    textarea.value = str;
+    textarea.setAttribute(`readonly`, `true`);
+    textarea.setAttribute(`contenteditable`, `true`);
+    textarea.style.position = `absolute`;
+    textarea.style.left = `-9999px`;
+    document.body.append(textarea);
+    textarea.select();
+    const range = document.createRange();
+    const sel = window.getSelection();
+    sel?.removeAllRanges();
+    sel?.addRange(range);
+    textarea.setSelectionRange(0, textarea.value.length);
+    document.execCommand(`copy`);
+    document.body.removeChild(textarea);
 
-    return Promise.resolve(true)
+    return Promise.resolve(true);
   }
 
-  return clipboard.writeText(str)
-}
+  return clipboard.writeText(str);
+};
 
-const delay = (duration: number) => new Promise((resolve) => setTimeout(resolve, duration))
+const delay = (duration: number) =>
+  new Promise((resolve) => setTimeout(resolve, duration));
 
 type CopyProps = {
-  content: string
-  duration?: number
-  fileName?: string
-  trim?: boolean
-}
+  content: string;
+  duration?: number;
+  fileName?: string;
+  trim?: boolean;
+};
 
-const Copy = ({ content, duration = 5000, fileName = ``, trim = false }: CopyProps) => {
-  const [copied, setCopied] = useState(false)
+const Copy = ({
+  content,
+  duration = 5000,
+  fileName = ``,
+  trim = false,
+}: CopyProps) => {
+  const [copied, setCopied] = useState(false);
 
   const label = copied
     ? `${fileName ? `${fileName} ` : ``}copied to clipboard`
-    : `${fileName ? `${fileName}: ` : ``}copy code to clipboard`
+    : `${fileName ? `${fileName}: ` : ``}copy code to clipboard`;
 
   return (
     <button
@@ -55,18 +61,16 @@ const Copy = ({ content, duration = 5000, fileName = ``, trim = false }: CopyPro
       //   variant: `copyButton`,
       // }}
       onClick={async () => {
-        await copyToClipboard(trim ? content.trim() : content)
-        setCopied(true)
-        await delay(duration)
-        setCopied(false)
+        await copyToClipboard(trim ? content.trim() : content);
+        setCopied(true);
+        await delay(duration);
+        setCopied(false);
       }}
     >
       {copied ? `Copied` : `Copy`}
-      <span aria-roledescription="status">
-        {label}
-      </span>
+      <span aria-roledescription="status">{label}</span>
     </button>
-  )
-}
+  );
+};
 
-export default Copy
+export default Copy;

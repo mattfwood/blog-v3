@@ -1,6 +1,6 @@
 import { Box, Button, Flex } from 'minerva-ui';
 import Link from 'next/link';
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -96,35 +96,46 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const NavLink = ({ children, ...props }) => (
-  <Link passHref {...props} >
-    <Button bg="transparent" color="white" border={0} _hover={{ backgroundColor: 'rgba(255, 255, 255, 0.08)' }}>
+  <Link passHref {...props}>
+    <Button
+      bg="transparent"
+      color="white"
+      border={0}
+      _hover={{ backgroundColor: 'rgba(255, 255, 255, 0.08)' }}
+    >
       {children}
     </Button>
   </Link>
-)
+);
 
 function Navigation() {
   return (
     <>
-    <Flex as="nav" py="16px" bg="rgba(23, 25, 35, 0.8)" position="fixed" width="100%" top="0px">
-      <NavLink href="/">Home</NavLink>
-      <NavLink href="/blog">Blog</NavLink>
-      <NavLink href="/about">About</NavLink>
+      <Flex
+        as="nav"
+        py="16px"
+        bg="rgba(23, 25, 35, 0.8)"
+        position="fixed"
+        width="100%"
+        top="0px"
+      >
+        <NavLink href="/">Home</NavLink>
+        <NavLink href="/blog">Blog</NavLink>
+        <NavLink href="/about">About</NavLink>
       </Flex>
       <Box mb="75px" />
-      </>
-  )
+    </>
+  );
 }
 
 export default function Layout({ children }) {
   return (
     <>
-
       <div className="wrapper">
         <Navigation />
         {children}
       </div>
       <GlobalStyle />
     </>
-  )
+  );
 }
