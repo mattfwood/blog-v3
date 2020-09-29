@@ -20,7 +20,7 @@ export default function Index({ posts }) {
       >
         Hey, I’m Matt Wood.
       </Heading>
-      <Stack gap="20px" mb="15px">
+      <Stack gap="20px" mb="15px" flexDirection="column">
         <Text>
           I'm a self-taught, full-stack developer from Texas. I've spent most of
           my life tinkering with things and trying to make things that are

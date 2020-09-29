@@ -120,7 +120,7 @@ function Navigation() {
         top="0px"
       >
         <NavLink href="/">Home</NavLink>
-        <NavLink href="/blog">Blog</NavLink>
+        {/* <NavLink href="/blog">Blog</NavLink> */}
         <NavLink href="/about">About</NavLink>
       </Flex>
       <Box mb="75px" />
