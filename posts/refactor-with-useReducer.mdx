@@ -1,0 +1,260 @@
+---
+title: Refactor Your Component's State with useReducer
+description: Create Actions to Simplify State
+date: '2020-02-12'
+# image: img/reduce.jpg
+# caption: 'Photo by [Markus Spiske](https://unsplash.com/@markusspiske?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on [Unsplash](https://unsplash.com)'
+# draft: false
+# tags:
+#   - React
+#   - Programming
+---
+
+
+I'll start with a disclaimer: I am not the biggest fan of Redux.
+
+I think Redux has some great ideas, but it tends to overcomplicate things and create more problems than it solves.
+
+It wasn't until I started using React's [`useReducer` hook](https://reactjs.org/docs/hooks-reference.html#usereducer) that I started to appreciate what a reducer does.
+
+As I started using it more, I even started to realize that I hadn't fully grasped what a "reducer" actually _was_.
+
+> A reducer is basically a function that takes in a series of actions and an `initialState`, and then "reduces" them to get the current state of the application.
+
+If this sounds familiar, it's because it's the same as the `.reduce` method for arrays:
+
+```js title=src/components/post.jsx
+const actions = [{
+  type: 'SIGN_IN',
+  payload: { name: 'Chidi' }
+}, {
+  type: 'SIGN_OUT'
+}]
+
+const initialState = {
+  user: null,
+}
+
+const currentState = actions.reduce((state, action) => {
+// to find the current state of our app
+// we take our initialState and apply all the actions on top of it
+  if (action.type === 'SIGN_IN') {
+    state = { ...state, user: { name: action.payload } }
+  }
+
+  if (action.type === 'SIGN_OUT') {
+    state = { ...state, user: null }
+  }
+
+  return state;
+// this is how we define our initial state in `.reduce`
+}, initialState);
+
+// currentState would equal { user: null }
+```
+
+Here, `currentState` would return `{ user: null }`, because even though we signed in, the last action we took was signing out.
+
+If you've used Redux or `useReducer` before, this will look similar even though there's no actual "reducer" in this code.
+
+The reason this is helpful in React is because we frequently have lots of pieces of state we need to track, and they'll often change in groups.
+
+So instead of using 4 or 5 `useState` calls, we can use a reducer to create _actions_ that describe our different state changes.
+
+Let's start with this example of a login form:
+
+```jsx react-live
+const { useState } = React;
+const LoginForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    // before we send the request, change loading state
+    setIsLoading(true);
+
+    try {
+      // send data to your "API"
+      const response = await setTimeout(() => ({ data: 'success' }), 500)
+
+      // if it's successful, set the data in state
+      setData(response.data);
+      alert('Success')
+    } catch (error) {
+      // if something goes wrong, they shouldn't get stuck in the loading state
+      setErrorMessage(error.message);
+    }
+
+    setIsLoading(false);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* we're using a fieldset here to disable all fields while the form is loading
+        https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset
+      */}
+      <fieldset disabled={isLoading}>
+        <label>
+          Email
+          <input
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+        </label>
+        {errorMessage !== null && <div>{errorMessage}</div>}
+        <button type="submit">Sign In</button>
+      </fieldset>
+    </form>
+  )
+}
+
+render(<LoginForm />)
+```
+
+This is a fairly standard component pattern for something like a login form. It includes:
+- Tracking input values and storing them in state
+- A loading state boolean to disable parts of the UI
+- Error handling and error message feedback
+
+In its current form it works fine, but if we added one or two more fields (maybe something like a "Stay Logged In" checkbox), it could start to become hard to manage.
+
+Instead, we could try to rethink our component's state changes in terms of "actions".
+
+When we make a request, we could call the action something like `START_SIGN_IN`, and it would change our `isLoading` field to `true`.
+
+When we get data back, we could make an action called `SIGN_IN_SUCCESS`, which would set the `isLoading` field to `false` and set our `data` with our request response.
+
+Let's start by converting these "actions" into a reducer:
+
+```js
+// a reducer takes the current state and the next action as params
+function reducer(state, action) {
+  switch (action.type) {
+    // we'll use this to handle our input field changes
+    case 'HANDLE_CHANGE':
+      // this syntax allows us to dynamically declare the key on an object
+      // so for our "email" input, this would be { email: "chidi@gmail.com" }
+      return { ...state, [action.name]: action.payload };
+    // this is how we start our loading step
+    case 'START_SIGN_IN':
+      return { ...state, isLoading: true };
+    case 'SIGN_IN_SUCCESS':
+      return { ...state, isLoading: false, data: action.payload };
+    case 'SET_ERROR_MESSAGE':
+      return { ...state, isLoading: false, errorMessage: action.payload };
+    // we use this default to make sure any typos don't fail silently
+    default:
+      throw new Error(`Action ${action.type} not found`);
+  }
+}
+```
+
+Now, we can take this reducer and pass it to the React `useReducer` hook like this:
+
+```jsx
+// for our initial state, we'll use all the initial states above in our `useState()` calls
+const initialState = {
+  email: '',
+  password: '',
+  isLoading: false,
+  data: null,
+  errorMessage: null,
+}
+
+const LoginForm = () => {
+  // we'll use our `reducer` from above
+  const [state, dispatch] = useReducer(reducer, initialState);
+  // ...rest of the component
+}
+```
+
+Now we have a `state` object and a `dispatch` function that we can use to call our actions. So if we wanted to handle a successful sign in, we would call:
+
+```js
+dispatch({ type: 'SIGN_IN_SUCCESS', payload: data})
+```
+
+This is telling our reducer that the action we want to use is called `SIGN_IN_SUCCESS`, and the `payload` is any additional data we need to pass to our action. In this case, it's the response we're getting from the API.
+
+Now we can change all of our `setState` calls to `dispatch` calls, and you'll see how it becomes easier to understand what's happening at each step in your app.
+
+For example, in the `handleSubmit` function, you can read the actions like instructions. First you "start sign in", and if it's successful you dispatch `SIGN_IN_SUCCESS`. If something goes wrong, you set an error message.
+
+This is not only easier for you to read, but it's _much_ easier for your coworkers to read as well. It also forces you to think about your state not as an object that's being changed, but as a "state machine" that's changed by actions.
+
+Here's what your final result might look like:
+
+```jsx
+const LoginForm = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const { email, password, isLoading, errorMessage } = state;
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    // before we send the request, change loading state
+    dispatch({ type: 'START_SIGN_IN' });
+
+    try {
+      // send data to your API
+      const response = await api.post('/login', { email, password })
+
+      // if it's successful, toggle the loading boolean and set the data in state
+      dispatch({ type: 'SIGN_IN_SUCCESS', payload: response.data });
+    } catch (error) {
+      // if something goes wrong, they shouldn't get stuck in the loading state
+      dispatch({ type: 'SET_ERROR', payload: error.message });
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <fieldset disabled={isLoading}>
+        <label>
+          Email
+          <input
+            value={email}
+            onChange={e =>
+              dispatch({
+                type: 'HANDLE_CHANGE',
+                name: 'email',
+                payload: e.target.value,
+              })
+            }
+          />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={e =>
+              dispatch({
+                type: 'HANDLE_CHANGE',
+                name: 'password',
+                payload: e.target.value,
+              })
+            }
+          >
+        </label>
+        {errorMessage !== null && <div>{errorMessage}</div>}
+        <button type="submit">Sign In</button>
+      </fieldset>
+    </form>
+  );
+};
+```
+
+If you want to push this even further, you could even turn this reducer into a custom hook called something like `useRequest` and use it throughout your app.
