@@ -1,12 +1,14 @@
 import { ThemeProvider, GlobalStyles, defaultTheme } from 'minerva-ui';
+import { MinervaTheme } from 'minerva-ui/dist/theme';
 
-const customTheme = {
+const customTheme: MinervaTheme = {
   ...defaultTheme,
   Text: {
     color: 'rgb(255, 255, 255)',
   },
   Heading: {
     color: 'rgb(255, 255, 255)',
+    lineHeight: 1.25
   },
 };
 
