@@ -4,13 +4,44 @@ import loadable from '@loadable/component';
 import theme from 'prism-react-renderer/themes/nightOwl';
 
 import Copy from './Copy';
-// import useMinimalBlogConfig from "../hooks/use-minimal-blog-config"
-// import { Language } from "../types"
+
+export type Language =
+  | "markup"
+  | "bash"
+  | "clike"
+  | "c"
+  | "cpp"
+  | "css"
+  | "javascript"
+  | "jsx"
+  | "coffeescript"
+  | "actionscript"
+  | "css-extr"
+  | "diff"
+  | "git"
+  | "go"
+  | "graphql"
+  | "handlebars"
+  | "json"
+  | "less"
+  | "makefile"
+  | "markdown"
+  | "objectivec"
+  | "ocaml"
+  | "python"
+  | "reason"
+  | "sass"
+  | "scss"
+  | "sql"
+  | "stylus"
+  | "tsx"
+  | "typescript"
+  | "wasm"
+  | "yaml"
 
 type CodeProps = {
   codeString: string;
-  // language: Language
-  language: any;
+  language: Language
   noLineNumbers?: boolean;
   metastring?: string;
   [key: string]: any;
@@ -19,21 +50,24 @@ type CodeProps = {
 const showLineNumbers = true;
 const showCopyButton = true;
 
-function getParams(className = ``) {
+function getParams(className = ``): [Language, any] {
   const [lang = ``, params = ``] = className.split(`:`);
 
-  return [
-    // @ts-ignore
-    lang.split(`language-`).pop().split(`{`).shift(),
-  ].concat(
-    // @ts-ignore
-    params.split(`&`).reduce((merged, param) => {
+
+  const parsedParams = params.split(`&`).reduce((merged, param) => {
       const [key, value] = param.split(`=`);
       // @ts-ignore
       merged[key] = value;
       return merged;
     }, {})
-  );
+
+  console.log(parsedParams)
+
+  return [
+    // @ts-ignore
+    lang.split(`language-`).pop().split(`{`).shift(),
+    parsedParams
+  ];
 }
 
 const RE = /{([\d,-]+)}/;
@@ -80,7 +114,7 @@ const Code = ({
   const shouldHighlightLine = calculateLinesToHighlight(metastring);
 
   const hasLineNumbers =
-    !noLineNumbers && language !== `noLineNumbers` && showLineNumbers;
+    !noLineNumbers && showLineNumbers;
 
   if (props[`react-live`]) {
     return (

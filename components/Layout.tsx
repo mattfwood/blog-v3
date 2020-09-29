@@ -95,8 +95,8 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const NavLink = ({ children, ...props }) => (
-  <Link passHref {...props}>
+const NavLink = ({ children, href, ...props }) => (
+  <Link passHref href={href} {...props}>
     <Button
       bg="transparent"
       color="white"
