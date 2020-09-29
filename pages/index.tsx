@@ -14,16 +14,16 @@ export default function Index({ posts }) {
   return (
     <Layout>
       <Heading
-        mt="32px"
         letterSpacing="tight"
-        mb="8px"
+        my="32px"
         as="h1"
         fontSize="48px"
         fontWeight={700}
+        display="block"
       >
         Hey, I’m Matt Wood.
       </Heading>
-      <Stack gap="20px" mb="15px" flexDirection="column">
+      <Stack gap="20px" py="20px" flexDirection="column">
         <Text>
           I'm a self-taught, full-stack developer from Texas. I've spent most of
           my life tinkering with things and trying to make things that are
@@ -40,7 +40,6 @@ export default function Index({ posts }) {
       </Stack>
       <Box mt="32px">
         {sortedPosts.map((post) => {
-          console.log({ post })
           return (
             <Link
               as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}

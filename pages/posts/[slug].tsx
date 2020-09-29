@@ -41,6 +41,7 @@ export default function PostPage({ source, frontMatter, readTime }) {
           as="h1"
           lineHeight={1.25}
           fontWeight={700}
+          fontSize={{ xs: '2.25rem', md: '3rem' }}
         >
           {frontMatter.title}
         </Heading>

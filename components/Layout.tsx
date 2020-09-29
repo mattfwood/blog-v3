@@ -85,13 +85,13 @@ const GlobalStyle = createGlobalStyle`
     min-width: 100%;
   }
 
-  .post-header h1 {
+  /* .post-header h1 {
     margin-bottom: 0;
-  }
+  } */
 
-  .post-header {
+  /* .post-header {
     margin-bottom: 2rem;
-  }
+  } */
   .description {
     opacity: 0.6;
   }
