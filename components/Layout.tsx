@@ -1,6 +1,7 @@
 import { Box, Button, Flex } from 'minerva-ui';
 import Link from 'next/link';
 import { createGlobalStyle } from 'styled-components';
+import SEO from './SEO';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -130,9 +131,10 @@ function Navigation() {
   );
 }
 
-export default function Layout({ children }) {
+export default function Layout({ children, ...props }) {
   return (
     <>
+      <SEO {...props} />
       <div className="wrapper">
         <Navigation />
         {children}

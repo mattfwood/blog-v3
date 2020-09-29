@@ -11,7 +11,7 @@ import Code from '../../components/Code';
 // import CustomLink from '../../components/CustomLink';
 import Layout from '../../components/Layout';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
-import { Heading, Text } from 'minerva-ui';
+import { Box, Flex, Heading, Text } from 'minerva-ui';
 
 const readingTime = require('reading-time');
 
@@ -31,11 +31,17 @@ const components = {
   },
 };
 
+const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+
+export function formatDate(date: string): string {
+  return new Date(date).toLocaleDateString('en-US', dateOptions)
+}
+
 export default function PostPage({ source, frontMatter, readTime }) {
   const content = hydrate(source, { components });
 
   return (
-    <Layout>
+    <Layout title={`${frontMatter.title} — Matt Wood`}>
       <div className="post-header">
         <Heading
           as="h1"
@@ -45,10 +51,15 @@ export default function PostPage({ source, frontMatter, readTime }) {
         >
           {frontMatter.title}
         </Heading>
-        {frontMatter.description && (
-          <p className="description">{frontMatter.description}</p>
-        )}
-        <Text>{readTime.text}</Text>
+        <Flex opacity={0.6} my={1}>
+        <Text >
+          {formatDate(frontMatter.date)}
+          </Text>
+          <Text mx={2}>
+            •
+          </Text>
+          <Text  mb={4}>{readTime.text}</Text>
+        </Flex>
       </div>
       <main>{content}</main>
     </Layout>

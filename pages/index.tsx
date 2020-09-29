@@ -6,6 +6,7 @@ import path from 'path';
 import Layout from '../components/Layout';
 import { postFilePaths, POSTS_PATH } from '../utils/mdxUtils';
 import { Box, Heading, Stack, Text } from 'minerva-ui';
+import { formatDate } from './posts/[slug]';
 
 export default function Index({ posts }) {
   const sortedPosts = posts.sort((a, b) => {
@@ -47,11 +48,14 @@ export default function Index({ posts }) {
               key={post.filePath}
               passHref
             >
-              <Box display="block" as="a" mb="32px" cursor="pointer">
-                <Heading as="h3" mb="8px">
+              <Box display="block" as="a" mb="48px" cursor="pointer">
+                <Heading as="h3">
                   {post.data.title}
                 </Heading>
-                <Text color="rgb(160, 174, 192)">{post.data?.description || post?.data?.spoiler}</Text>
+                <Text opacity={0.6}>
+                  {formatDate(post.data.date)}
+                </Text>
+                <Text mt="8px" color="rgb(160, 174, 192)">{post.data?.description || post?.data?.spoiler}</Text>
               </Box>
             </Link>
           );
