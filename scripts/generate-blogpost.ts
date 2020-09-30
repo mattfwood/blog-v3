@@ -148,3 +148,5 @@ function removeEmpty(obj) {
 generateBlogPost();
 
 /* eslint no-console:0 */
+
+export {};
