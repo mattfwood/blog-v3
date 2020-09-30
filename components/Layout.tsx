@@ -1,4 +1,5 @@
 import { Box, Button, Flex } from 'minerva-ui';
+import Head from 'next/head';
 import Link from 'next/link';
 import Footer from './Footer';
 import { GlobalStyle } from './GlobalStyle';
@@ -42,6 +43,9 @@ export default function Layout({ children, ...props }) {
   return (
     <>
       <SEO {...props} />
+      <Head>
+        <link rel="shortcut icon" href="/favicon.ico" />
+      </Head>
       <div className="wrapper">
         <Navigation />
         {children}
