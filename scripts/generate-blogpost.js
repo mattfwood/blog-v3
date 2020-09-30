@@ -43,16 +43,16 @@ async function generateBlogPost() {
       name: 'description',
       message: 'Description',
     },
-    {
-      type: 'input',
-      name: 'categories',
-      message: 'Categories (comma separated)',
-    },
-    {
-      type: 'input',
-      name: 'keywords',
-      message: 'Keywords (comma separated)',
-    },
+    // {
+    //   type: 'input',
+    //   name: 'categories',
+    //   message: 'Categories (comma separated)',
+    // },
+    // {
+    //   type: 'input',
+    //   name: 'keywords',
+    //   message: 'Keywords (comma separated)',
+    // },
   ]);
   const slug = slugify(title);
   const destination = fromRoot('posts');
@@ -66,8 +66,8 @@ async function generateBlogPost() {
       title,
       date: formatDate(new Date()),
       description: `_${description}_`,
-      categories: listify(categories),
-      keywords: listify(keywords),
+      // categories: listify(categories),
+      // keywords: listify(keywords),
       banner: `./images/${slug}.jpg`,
       bannerCredit,
     })
@@ -81,7 +81,7 @@ async function generateBlogPost() {
 }
 
 async function getBannerPhoto(title, destination) {
-  const imagesDestination = path.join(__dirname, '..', 'posts', 'images');
+  const imagesDestination = path.join(__dirname, '..', 'public', 'images');
 
   await opn(`https://unsplash.com/search/photos/${encodeURIComponent(title)}`, {
     wait: false,
