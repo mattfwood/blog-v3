@@ -35,7 +35,7 @@ const NowPlaying = () => {
         ml={3}
       >
         <Link
-          fontWeight="600"
+          // @ts-ignore
           color="rgb(255, 255, 255)"
           maxWidth="190px"
           whiteSpace="nowrap"

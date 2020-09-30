@@ -1,5 +1,6 @@
-export default async function Fetcher(...args) {
-  const res = await fetch(...args);
+export default async function fetcher(params: any) {
+  // @ts-ignore
+  const res = await fetch(...params);
 
   return res.json();
 }
