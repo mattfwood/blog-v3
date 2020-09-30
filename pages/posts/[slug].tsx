@@ -40,6 +40,8 @@ export function formatDate(date: string): string {
   return format(new Date(date), 'MMN D, yyyy');
 }
 
+console.log('test');
+
 export default function PostPage({ source, frontMatter, readTime }) {
   const content = hydrate(source, { components });
 

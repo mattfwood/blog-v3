@@ -58,6 +58,9 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --fix --cache"
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix --cache",
+      "tsc --noEmit"
+    ]
   }
 }
