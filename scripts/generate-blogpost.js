@@ -58,17 +58,17 @@ async function generateBlogPost() {
   const destination = fromRoot('posts');
   // mkdirp.sync(destination);
 
-  const bannerCredit = await getBannerPhoto(title, destination);
+  const bannerCredit = await getBannerPhoto(title, destination, slug);
 
   const yaml = jsToYaml.stringify(
     removeEmpty({
       slug,
       title,
       date: formatDate(new Date()),
-      description: `_${description}_`,
+      description: description,
       // categories: listify(categories),
       // keywords: listify(keywords),
-      banner: `./images/${slug}.jpg`,
+      banner: `/images/${slug}.jpg`,
       bannerCredit,
     })
   );
@@ -80,10 +80,10 @@ async function generateBlogPost() {
   console.log(`${destination.replace(process.cwd(), '')} is all ready for you`);
 }
 
-async function getBannerPhoto(title, destination) {
+async function getBannerPhoto(title, destination, slug) {
   const imagesDestination = path.join(__dirname, '..', 'public', 'images');
 
-  await opn(`https://unsplash.com/search/photos/${encodeURIComponent(title)}`, {
+  await opn(`https://unsplash.com/search/photos/${encodeURIComponent(title)}?orientation=landscape`, {
     wait: false,
   });
 
@@ -109,7 +109,7 @@ async function getBannerPhoto(title, destination) {
     const spinner = ora('compressing the image with tinypng.com').start();
     await util
       .promisify(source.toFile)
-      .call(source, path.join(imagesDestination, 'banner.jpg'));
+      .call(source, path.join(imagesDestination, `${slug}.jpg`));
     spinner.text = 'compressed the image with tinypng.com';
     spinner.stop();
     const bannerCredit = await getPhotoCredit(unsplashPhotoId);

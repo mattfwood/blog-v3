@@ -3,16 +3,18 @@ import matter from 'gray-matter';
 import hydrate from 'next-mdx-remote/hydrate';
 import renderToString from 'next-mdx-remote/render-to-string';
 import { preToCodeBlock } from 'mdx-utils';
-import dynamic from 'next/dynamic';
+import ReactMarkdown from 'react-markdown';
+
+// import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import Link from 'next/link';
+// import Link from 'next/link';
 import path from 'path';
 import Code from '../../components/Code';
 // import CustomLink from '../../components/CustomLink';
 import Layout from '../../components/Layout';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
-import { Box, Flex, Heading, Text } from 'minerva-ui';
-import BodyContent from '../../components/BodyContent';
+import { Flex, Heading, Image, Text } from 'minerva-ui';
+// import BodyContent from '../../components/BodyContent';
 
 const readingTime = require('reading-time');
 
@@ -41,6 +43,8 @@ export function formatDate(date: string): string {
 export default function PostPage({ source, frontMatter, readTime }) {
   const content = hydrate(source, { components });
 
+  console.log({ source, frontMatter });
+
   return (
     <Layout title={`${frontMatter.title} — Matt Wood`}>
       <div className="post-header">
@@ -53,11 +57,15 @@ export default function PostPage({ source, frontMatter, readTime }) {
         >
           {frontMatter.title}
         </Heading>
-        <Flex opacity={0.6} my={1}>
+        <Flex opacity={0.6} my={2}>
           <Text>{formatDate(frontMatter.date)}</Text>
           <Text mx={2}>•</Text>
           <Text mb={4}>{readTime.text}</Text>
         </Flex>
+        <Image src={frontMatter?.banner} />
+        <Text fontSize="14px" my={2} textAlign="center">
+          <ReactMarkdown source={frontMatter.bannerCredit} />
+        </Text>
       </div>
       <main className="prose" style={{ marginBottom: '60px' }}>
         {content}

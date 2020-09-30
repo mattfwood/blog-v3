@@ -26,29 +26,33 @@ export default function Index({ posts }) {
         >
           Sanity Check
         </Heading>
-        {sortedPosts.map((post) => {
-          const description = post.data?.description || post?.data?.spoiler;
-          return (
-            <Link
-              as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
-              href={`/posts/[slug]`}
-              key={post.filePath}
-              passHref
-            >
-              <Box display="block" as="a" mb="48px" cursor="pointer">
-                <Text opacity={0.6} fontSize="14px" mb="8px">
-                  {formatDate(post.data.date)}
-                </Text>
-                <Heading as="h3">{post.data.title}</Heading>
-                {!!description && (
-                  <Text mt="8px" color="rgb(160, 174, 192)">
-                    {description}
+        {sortedPosts
+          .filter(
+            (post) => process.env.NODE_ENV === 'development' || !post.draft
+          )
+          .map((post) => {
+            const description = post.data?.description || post?.data?.spoiler;
+            return (
+              <Link
+                as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
+                href={`/posts/[slug]`}
+                key={post.filePath}
+                passHref
+              >
+                <Box display="block" as="a" mb="48px" cursor="pointer">
+                  <Text opacity={0.6} fontSize="14px" mb="8px">
+                    {formatDate(post.data.date)}
                   </Text>
-                )}
-              </Box>
-            </Link>
-          );
-        })}
+                  <Heading as="h3">{post.data.title}</Heading>
+                  {!!description && (
+                    <Text mt="8px" color="rgb(160, 174, 192)">
+                      {description}
+                    </Text>
+                  )}
+                </Box>
+              </Link>
+            );
+          })}
       </Box>
     </Layout>
   );
