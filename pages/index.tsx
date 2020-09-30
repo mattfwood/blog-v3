@@ -14,33 +14,20 @@ export default function Index({ posts }) {
   });
   return (
     <Layout>
-      <Heading
+      <Box mt="32px">
+        <Heading
         letterSpacing="tight"
-        my="32px"
+          my="32px"
+          mb="48px"
         as="h1"
         fontSize="48px"
         fontWeight={700}
         display="block"
       >
-        Hey, I’m Matt Wood.
+        Sanity Check
       </Heading>
-      <Stack gap="20px" py="20px" flexDirection="column">
-        <Text>
-          I'm a self-taught, full-stack developer from Texas. I've spent most of
-          my life tinkering with things and trying to make things that are
-          useful for myself and others.
-        </Text>
-        <Text>
-          I'm passionate about explaining complex topics in simple and
-          approachable ways and sharing the things I learn each day.
-        </Text>
-        <Text>
-          I spend my free time starting more projects than I'll ever be able to
-          finish and learning as much as I can along the way.
-        </Text>
-      </Stack>
-      <Box mt="32px">
         {sortedPosts.map((post) => {
+          const description = post.data?.description || post?.data?.spoiler
           return (
             <Link
               as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
@@ -55,7 +42,7 @@ export default function Index({ posts }) {
                 <Text opacity={0.6}>
                   {formatDate(post.data.date)}
                 </Text>
-                <Text mt="8px" color="rgb(160, 174, 192)">{post.data?.description || post?.data?.spoiler}</Text>
+                {!!description && <Text mt="8px" color="rgb(160, 174, 192)">{description}</Text>}
               </Box>
             </Link>
           );
