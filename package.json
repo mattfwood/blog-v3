@@ -5,7 +5,8 @@
     "dev:watch": "next",
     "dev": "next-remote-watch ./posts",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "generate:post": "node scripts/generate-blogpost.js"
   },
   "dependencies": {
     "@loadable/component": "^5.13.2",
@@ -31,6 +32,7 @@
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
     "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.10.0",
     "eslint-config-cratebind": "^6.0.2",
     "fake-useragent": "^1.0.1",

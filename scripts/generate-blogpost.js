@@ -12,7 +12,7 @@ const prettier = require('prettier');
 const tinify = require('tinify');
 const ora = require('ora');
 require('dotenv').config({
-  path: path.join(__dirname, '.env'),
+  path: path.join(__dirname, '..', '.env'),
 });
 
 const fromRoot = (...p) => path.join(__dirname, '..', ...p);
@@ -55,8 +55,8 @@ async function generateBlogPost() {
     },
   ]);
   const slug = slugify(title);
-  const destination = fromRoot('posts', slug);
-  mkdirp.sync(destination);
+  const destination = fromRoot('posts');
+  // mkdirp.sync(destination);
 
   const bannerCredit = await getBannerPhoto(title, destination);
 
@@ -65,24 +65,24 @@ async function generateBlogPost() {
       slug,
       title,
       date: formatDate(new Date()),
-      author: 'Kent C. Dodds',
+      // author: 'Kent C. Dodds',
       description: `_${description}_`,
       categories: listify(categories),
       keywords: listify(keywords),
-      banner: './images/banner.jpg',
+      banner: `./images/${slug}.jpg`,
       bannerCredit,
     })
   );
   const markdown = prettier.format(`---\n${yaml}\n---\n`, {
     parser: 'mdx',
   });
-  fs.writeFileSync(path.join(destination, 'index.mdx'), markdown);
+  fs.writeFileSync(path.join(destination, `${slug}.mdx`), markdown);
 
   console.log(`${destination.replace(process.cwd(), '')} is all ready for you`);
 }
 
 async function getBannerPhoto(title, destination) {
-  const imagesDestination = path.join(destination, 'images');
+  const imagesDestination = path.join(__dirname, '..', 'posts', 'images');
 
   await opn(`https://unsplash.com/search/photos/${encodeURIComponent(title)}`, {
     wait: false,
