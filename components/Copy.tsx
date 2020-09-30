@@ -65,7 +65,7 @@ const Copy = ({
       color="white"
       border={0}
       _hover={{
-        backgroundColor: '#9f7aea'
+        backgroundColor: '#9f7aea',
       }}
       name={label}
       disabled={copied}

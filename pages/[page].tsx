@@ -13,6 +13,7 @@ import Layout from '../components/Layout';
 import { contentFilePaths, CONTENT_PATH } from '../utils/mdxUtils';
 import { Flex, Heading } from 'minerva-ui';
 import NowPlaying from '../components/NowPlaying';
+import RecentlyPlayed from '../components/RecentlyPlayed';
 // import BodyContent from '../../components/BodyContent';
 
 // Custom components/renderers to pass to MDX.
@@ -25,6 +26,7 @@ const components = {
   // useful for conditionally loading components for certain routes.
   // See the notes in README.md for more details.
   Head,
+  // eslint-disable-next-line
   pre: (preProps) => {
     const props = preToCodeBlock(preProps);
     return <Code {...props} />;
@@ -55,9 +57,13 @@ export default function PostPage({ source, frontMatter }) {
       <main className="prose" style={{ marginBottom: '20px' }}>
         {content}
       </main>
-      <Flex justifyContent="center">
-        <NowPlaying />
-      </Flex>
+      {frontMatter.title === 'About' ? (
+        <RecentlyPlayed />
+      ) : (
+        <Flex justifyContent="center">
+          <NowPlaying />
+        </Flex>
+      )}
     </Layout>
   );
 }

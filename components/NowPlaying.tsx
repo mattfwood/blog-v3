@@ -1,9 +1,8 @@
 import {
   Box,
-  Icon,
   Image,
   Link,
-  Skeleton,
+  SkeletonItem,
   Stack,
   Text,
   ThemeProvider,
@@ -12,9 +11,12 @@ import useSWR from 'swr';
 import { customTheme } from '../pages/_app';
 import fetcher from '../utils/fetcher';
 
+const ART_SIZE = '80px';
+
 const NowPlaying = () => {
   const { data, error } = useSWR('/api/spotify', fetcher);
 
+  const isLoaded = Boolean(data) && !error;
   return (
     <ThemeProvider theme={customTheme}>
       <Box
@@ -25,16 +27,21 @@ const NowPlaying = () => {
         border="1px solid"
         borderRadius={8}
         borderColor="rgb(45, 55, 72)"
-        p={3}
-        w="300px"
+        p={4}
+        width="100%"
+        maxWidth="350px"
       >
-        <Image
-          alt="Spotify album cover"
-          height="60px"
-          width="60px"
-          borderRadius={8}
-          src={data?.album_art || '/images/spotify-placeholder.jpg'}
-        />
+        {isLoaded ? (
+          <Image
+            alt="Spotify album cover"
+            height={ART_SIZE}
+            width={ART_SIZE}
+            borderRadius={8}
+            src={data?.album_art || '/images/spotify-placeholder.jpg'}
+          />
+        ) : (
+          <SkeletonItem width={ART_SIZE} height={ART_SIZE} borderRadius={8} />
+        )}
         {/* <Skeleton>
       </Skeleton> */}
         <Stack
@@ -48,7 +55,7 @@ const NowPlaying = () => {
           <Link
             // @ts-ignore
             color="rgb(255, 255, 255)"
-            maxWidth="190px"
+            maxWidth="180px"
             whiteSpace="nowrap"
             overflow="hidden"
             textOverflow="ellipsis"
@@ -59,7 +66,7 @@ const NowPlaying = () => {
             }}
             isExternal
           >
-            {data?.song || 'Not Playing'}
+            {isLoaded && (data?.song || 'Not Playing')}
           </Link>
           <Text
             color="gray.500"
@@ -70,16 +77,30 @@ const NowPlaying = () => {
               margin: 0,
             }}
           >
-            {data?.artist || 'Spotify'}
+            {isLoaded && (data?.artist || 'Spotify')}
           </Text>
         </Stack>
 
-        <Box ml="auto" width="16px" height="16px">
-          <svg viewBox="0 0 168 168" focusable="false" role="presentation">
-            <path
-              fill="#1ED760"
-              d="M83.996.277C37.747.277.253 37.77.253 84.019c0 46.251 37.494 83.741 83.743 83.741 46.254 0 83.744-37.49 83.744-83.741 0-46.246-37.49-83.738-83.745-83.738l.001-.004zm38.404 120.78a5.217 5.217 0 01-7.18 1.73c-19.662-12.01-44.414-14.73-73.564-8.07a5.222 5.222 0 01-6.249-3.93 5.213 5.213 0 013.926-6.25c31.9-7.291 59.263-4.15 81.337 9.34 2.46 1.51 3.24 4.72 1.73 7.18zm10.25-22.805c-1.89 3.075-5.91 4.045-8.98 2.155-22.51-13.839-56.823-17.846-83.448-9.764-3.453 1.043-7.1-.903-8.148-4.35a6.538 6.538 0 014.354-8.143c30.413-9.228 68.222-4.758 94.072 11.127 3.07 1.89 4.04 5.91 2.15 8.976v-.001zm.88-23.744c-26.99-16.031-71.52-17.505-97.289-9.684-4.138 1.255-8.514-1.081-9.768-5.219a7.835 7.835 0 015.221-9.771c29.581-8.98 78.756-7.245 109.83 11.202a7.823 7.823 0 012.74 10.733c-2.2 3.722-7.02 4.949-10.73 2.739z"
-            />
+        <Box
+          ml="auto"
+          width="16px"
+          height="16px"
+          mt="2px"
+          color="rgb(160,174,192)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
           </svg>
         </Box>
       </Box>

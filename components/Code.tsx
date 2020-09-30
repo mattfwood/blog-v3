@@ -8,42 +8,42 @@ import { Box, styled, ThemeProvider } from 'minerva-ui';
 import { customTheme } from '../pages/_app';
 
 export type Language =
-  | "markup"
-  | "bash"
-  | "clike"
-  | "c"
-  | "cpp"
-  | "css"
-  | "javascript"
-  | "jsx"
-  | "coffeescript"
-  | "actionscript"
-  | "css-extr"
-  | "diff"
-  | "git"
-  | "go"
-  | "graphql"
-  | "handlebars"
-  | "json"
-  | "less"
-  | "makefile"
-  | "markdown"
-  | "objectivec"
-  | "ocaml"
-  | "python"
-  | "reason"
-  | "sass"
-  | "scss"
-  | "sql"
-  | "stylus"
-  | "tsx"
-  | "typescript"
-  | "wasm"
-  | "yaml"
+  | 'markup'
+  | 'bash'
+  | 'clike'
+  | 'c'
+  | 'cpp'
+  | 'css'
+  | 'javascript'
+  | 'jsx'
+  | 'coffeescript'
+  | 'actionscript'
+  | 'css-extr'
+  | 'diff'
+  | 'git'
+  | 'go'
+  | 'graphql'
+  | 'handlebars'
+  | 'json'
+  | 'less'
+  | 'makefile'
+  | 'markdown'
+  | 'objectivec'
+  | 'ocaml'
+  | 'python'
+  | 'reason'
+  | 'sass'
+  | 'scss'
+  | 'sql'
+  | 'stylus'
+  | 'tsx'
+  | 'typescript'
+  | 'wasm'
+  | 'yaml';
 
 type CodeProps = {
   codeString: string;
-  language: Language
+  language: Language;
   noLineNumbers?: boolean;
   metastring?: string;
   [key: string]: any;
@@ -55,18 +55,17 @@ const showCopyButton = true;
 function getParams(className = ``): [Language, any] {
   const [lang = ``, params = ``] = className.split(`:`);
 
-
   const parsedParams = params.split(`&`).reduce((merged, param) => {
-      const [key, value] = param.split(`=`);
-      // @ts-ignore
-      merged[key] = value;
-      return merged;
-    }, {})
+    const [key, value] = param.split(`=`);
+    // @ts-ignore
+    merged[key] = value;
+    return merged;
+  }, {});
 
   return [
     // @ts-ignore
     lang.split(`language-`).pop().split(`{`).shift(),
-    parsedParams
+    parsedParams,
   ];
 }
 
@@ -119,6 +118,7 @@ const PreviewStyles = styled.div`
 const LazyLiveProvider = loadable(async () => {
   const Module = await import(`react-live`);
   const { LiveProvider, LiveEditor, LiveError, LivePreview } = Module;
+  // eslint-disable-next-line
   return (props: any) => (
     <LiveProvider {...props}>
       {props.showCopyButton && <Copy content={props.code} />}
@@ -143,8 +143,7 @@ const Code = ({
   const [language, { title = `` }] = getParams(blockClassName);
   const shouldHighlightLine = calculateLinesToHighlight(metastring);
 
-  const hasLineNumbers =
-    !noLineNumbers && showLineNumbers;
+  const hasLineNumbers = !noLineNumbers && showLineNumbers;
 
   if (props[`react-live`]) {
     return (
@@ -160,52 +159,62 @@ const Code = ({
   }
   return (
     <ThemeProvider theme={customTheme}>
-    <Highlight
-      {...defaultProps}
-      code={codeString}
-      language={language}
-      theme={theme}
-    >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <React.Fragment>
-          {title && (
-            <Box padding="8px 16px" bg="rgb(130, 170, 255)" fontFamily={`Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`}>
-              {title}
-            </Box>
-          )}
-          <div className="code-highlight" data-language={language} style={{ position: 'relative', marginBottom: '32px' }}>
-            <pre
-              className={className}
-              style={style}
-              data-linenumber={hasLineNumbers}
+      <Highlight
+        {...defaultProps}
+        code={codeString}
+        language={language}
+        theme={theme}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <React.Fragment>
+            {title && (
+              <Box
+                padding="8px 16px"
+                bg="rgb(130, 170, 255)"
+                fontFamily={`Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`}
+              >
+                {title}
+              </Box>
+            )}
+            <div
+              className="code-highlight"
+              data-language={language}
+              style={{ position: 'relative', marginBottom: '32px' }}
             >
-              {showCopyButton && <Copy content={codeString} fileName={title} />}
-              <code className={`language-${language}`}>
-                {tokens.map((line, i) => {
-                  const lineProps = getLineProps({ line, key: i });
+              <pre
+                className={className}
+                style={style}
+                data-linenumber={hasLineNumbers}
+              >
+                {showCopyButton && (
+                  <Copy content={codeString} fileName={title} />
+                )}
+                <code className={`language-${language}`}>
+                  {tokens.map((line, i) => {
+                    const lineProps = getLineProps({ line, key: i });
 
-                  if (shouldHighlightLine(i)) {
-                    lineProps.className = `${lineProps.className} highlight-line`;
-                  }
+                    if (shouldHighlightLine(i)) {
+                      lineProps.className = `${lineProps.className} highlight-line`;
+                    }
 
-                  return (
-                    <div {...lineProps}>
-                      {hasLineNumbers && (
-                        <span className="line-number-style">{i + 1}</span>
-                      )}
-                      {line.map((token, key) => (
-                        <span {...getTokenProps({ token, key })} />
-                      ))}
-                    </div>
-                  );
-                })}
-              </code>
-            </pre>
-          </div>
-        </React.Fragment>
-      )}
+                    return (
+                      <div {...lineProps}>
+                        {hasLineNumbers && (
+                          <span className="line-number-style">{i + 1}</span>
+                        )}
+                        {line.map((token, key) => (
+                          <span {...getTokenProps({ token, key })} />
+                        ))}
+                      </div>
+                    );
+                  })}
+                </code>
+              </pre>
+            </div>
+          </React.Fragment>
+        )}
       </Highlight>
-      </ThemeProvider>
+    </ThemeProvider>
   );
 };
 

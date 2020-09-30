@@ -23,16 +23,16 @@ const padLeft0 = (n) => n.toString().padStart(2, '0');
 const formatDate = (d) =>
   `${d.getFullYear()}-${padLeft0(d.getMonth() + 1)}-${padLeft0(d.getDate())}`;
 
-const listify = (a) =>
-  a && a.trim().length
-    ? a
-        .split(',')
-        .map((s) => s.trim())
-        .filter(Boolean)
-    : null;
+// const listify = (a) =>
+//   a && a.trim().length
+//     ? a
+//         .split(',')
+//         .map((s) => s.trim())
+//         .filter(Boolean)
+//     : null;
 
 async function generateBlogPost() {
-  const { title, description, categories, keywords } = await inquirer.prompt([
+  const { title, description } = await inquirer.prompt([
     {
       type: 'input',
       name: 'title',
@@ -83,9 +83,14 @@ async function generateBlogPost() {
 async function getBannerPhoto(title, destination, slug) {
   const imagesDestination = path.join(__dirname, '..', 'public', 'images');
 
-  await opn(`https://unsplash.com/search/photos/${encodeURIComponent(title)}?orientation=landscape`, {
-    wait: false,
-  });
+  await opn(
+    `https://unsplash.com/search/photos/${encodeURIComponent(
+      title
+    )}?orientation=landscape`,
+    {
+      wait: false,
+    }
+  );
 
   const { unsplashPhotoId } = await inquirer.prompt([
     {

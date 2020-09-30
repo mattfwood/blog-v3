@@ -4,6 +4,7 @@ import hydrate from 'next-mdx-remote/hydrate';
 import renderToString from 'next-mdx-remote/render-to-string';
 import { preToCodeBlock } from 'mdx-utils';
 import ReactMarkdown from 'react-markdown';
+import { format } from 'date-fns';
 
 // import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -28,16 +29,15 @@ const components = {
   // useful for conditionally loading components for certain routes.
   // See the notes in README.md for more details.
   Head,
+  // eslint-disable-next-line
   pre: (preProps) => {
     const props = preToCodeBlock(preProps);
     return <Code {...props} />;
   },
 };
 
-const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-
 export function formatDate(date: string): string {
-  return new Date(date).toLocaleDateString('en-US', dateOptions);
+  return format(new Date(date), 'MMN D, yyyy');
 }
 
 export default function PostPage({ source, frontMatter, readTime }) {
@@ -60,7 +60,9 @@ export default function PostPage({ source, frontMatter, readTime }) {
           <Text mx={2}>•</Text>
           <Text>{readTime.text}</Text>
         </Flex>
-        <Image src={frontMatter?.banner} alt={frontMatter?.bannerCredit} />
+        {Boolean(frontMatter?.banner) && (
+          <Image src={frontMatter?.banner} alt={frontMatter?.bannerCredit} />
+        )}
         {Boolean(frontMatter?.bannerCredit) && (
           <Text fontSize="14px" my={2} textAlign="center">
             <ReactMarkdown source={frontMatter.bannerCredit} />

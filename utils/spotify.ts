@@ -10,18 +10,18 @@ const {
   SPOTIFY_CLIENT_SECRET,
   SPOTIFY_CLIENT_ACCESS_TOKEN,
   SPOTIFY_CLIENT_REFRESH_TOKEN,
-  REDIRECT_CODE,
+  // REDIRECT_CODE,
 } = process.env;
 
 const HOST = 'http://localhost:3000';
 
-const scopes = [
-  'user-read-private',
-  'user-read-email',
-  'user-read-currently-playing',
-  'user-read-playback-state',
-  'user-read-recently-played',
-];
+// const scopes = [
+//   'user-read-private',
+//   'user-read-email',
+//   'user-read-currently-playing',
+//   'user-read-playback-state',
+//   'user-read-recently-played',
+// ];
 
 export async function initSpotify() {
   const spotify = new Spotify({
