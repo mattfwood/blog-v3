@@ -70,6 +70,7 @@ const Copy = ({
       name={label}
       disabled={copied}
       className="code-copy-button"
+      zIndex={500}
       onClick={async () => {
         await copyToClipboard(trim ? content.trim() : content);
         setCopied(true);

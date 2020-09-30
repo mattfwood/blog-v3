@@ -12,6 +12,7 @@ import Code from '../../components/Code';
 import Layout from '../../components/Layout';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
 import { Box, Flex, Heading, Text } from 'minerva-ui';
+import BodyContent from '../../components/BodyContent';
 
 const readingTime = require('reading-time');
 
@@ -34,7 +35,7 @@ const components = {
 const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
 export function formatDate(date: string): string {
-  return new Date(date).toLocaleDateString('en-US', dateOptions)
+  return new Date(date).toLocaleDateString('en-US', dateOptions);
 }
 
 export default function PostPage({ source, frontMatter, readTime }) {
@@ -45,23 +46,22 @@ export default function PostPage({ source, frontMatter, readTime }) {
       <div className="post-header">
         <Heading
           as="h1"
-          lineHeight={1.25}
-          fontWeight={700}
-          fontSize={{ xs: '2.25rem', md: '3rem' }}
+          // lineHeight={1.25}
+          lineHeight={{ xs: '36px', md: '44px' }}
+          fontWeight={800}
+          fontSize={{ xs: '30px', md: '36px' }}
         >
           {frontMatter.title}
         </Heading>
         <Flex opacity={0.6} my={1}>
-        <Text >
-          {formatDate(frontMatter.date)}
-          </Text>
-          <Text mx={2}>
-            •
-          </Text>
-          <Text  mb={4}>{readTime.text}</Text>
+          <Text>{formatDate(frontMatter.date)}</Text>
+          <Text mx={2}>•</Text>
+          <Text mb={4}>{readTime.text}</Text>
         </Flex>
       </div>
-      <main>{content}</main>
+      <main className="prose" style={{ marginBottom: '60px' }}>
+        {content}
+      </main>
     </Layout>
   );
 }

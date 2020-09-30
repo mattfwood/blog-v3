@@ -179,10 +179,11 @@ function Navigation() {
       <Flex
         as="nav"
         py="16px"
-        bg="rgba(23, 25, 35, 0.8)"
+        bg="rgba(23, 25, 35, 1)"
         position="fixed"
         width="100%"
         top="0px"
+        zIndex={1000}
       >
         <NavLink href="/">Home</NavLink>
         {/* <NavLink href="/blog">Blog</NavLink> */}
