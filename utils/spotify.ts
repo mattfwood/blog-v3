@@ -29,19 +29,19 @@ export async function initSpotify() {
     clientSecret: SPOTIFY_CLIENT_SECRET,
     redirectUri: `${HOST}/authorize/callback`,
   });
-  // const authorizeURL = spotify.createAuthorizeURL(scopes);
-
-  // console.log({ authorizeURL });
-
-  // const data = await spotify.authorizationCodeGrant(REDIRECT_CODE);
-
-  // console.log(data.body);
-
-  // spotify.setAccessToken(data.body['access_token']);
-  // spotify.setRefreshToken(data.body['refresh_token']);
 
   spotify.setAccessToken(SPOTIFY_CLIENT_ACCESS_TOKEN);
   spotify.setRefreshToken(SPOTIFY_CLIENT_REFRESH_TOKEN);
+
+  try {
+    await spotify.getMyCurrentPlaybackState();
+  } catch (error) {
+    // if the token has expired, refresh it
+    if (error.statusCode === 401) {
+      const data = await spotify.refreshAccessToken();
+      spotify.setAccessToken(data.body['access_token']);
+    }
+  }
 
   return spotify;
 }

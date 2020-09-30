@@ -7,8 +7,8 @@ import path from 'path';
 import Layout from '../components/Layout';
 import { postFilePaths, POSTS_PATH } from '../utils/mdxUtils';
 import { Box, Button, Flex, Heading, Text } from 'minerva-ui';
-import { formatDate } from './posts/[slug]';
 import NowPlaying from '../components/NowPlaying';
+import { formatDate } from '../utils/dates';
 
 const POST_INCREMENT = 5;
 

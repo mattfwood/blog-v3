@@ -33,12 +33,6 @@ const components = {
   },
 };
 
-const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-
-export function formatDate(date: string): string {
-  return new Date(date).toLocaleDateString('en-US', dateOptions);
-}
-
 export default function PostPage({ source, frontMatter }) {
   const content = hydrate(source, { components });
 

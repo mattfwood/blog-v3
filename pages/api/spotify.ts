@@ -24,7 +24,6 @@ export default async (_, res) => {
     // console.log({ data });
     return res.status(200).json({ ...currentSong, data });
   } catch (error) {
-    console.error(error.message);
     throw new Error(error);
   }
 };

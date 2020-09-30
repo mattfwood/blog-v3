@@ -4,7 +4,6 @@ import hydrate from 'next-mdx-remote/hydrate';
 import renderToString from 'next-mdx-remote/render-to-string';
 import { preToCodeBlock } from 'mdx-utils';
 import ReactMarkdown from 'react-markdown';
-import { format } from 'date-fns';
 
 // import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -15,6 +14,7 @@ import Code from '../../components/Code';
 import Layout from '../../components/Layout';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
 import { Flex, Heading, Image, Text } from 'minerva-ui';
+import { formatDate } from '../../utils/dates';
 // import BodyContent from '../../components/BodyContent';
 
 const readingTime = require('reading-time');
@@ -35,10 +35,6 @@ const components = {
     return <Code {...props} />;
   },
 };
-
-export function formatDate(date: string): string {
-  return format(new Date(date), 'MMN D, yyyy');
-}
 
 export default function PostPage({ source, frontMatter, readTime }) {
   const content = hydrate(source, { components });
