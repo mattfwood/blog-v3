@@ -1,6 +1,7 @@
-import React from 'react'
-import { Heading, Stack, Text } from 'minerva-ui'
-import Layout from '../components/Layout'
+import React from 'react';
+import { Flex, Heading, Stack, Text } from 'minerva-ui';
+import Layout from '../components/Layout';
+import NowPlaying from '../components/NowPlaying';
 
 export default function AboutPage() {
   return (
@@ -9,12 +10,15 @@ export default function AboutPage() {
         letterSpacing="tight"
         my="16px"
         as="h1"
-        fontSize="48px"
+        fontSize="36px"
         fontWeight={700}
         display="block"
       >
         My name's Matt Wood.
       </Heading>
+      <Flex justifyContent="center">
+        <NowPlaying />
+      </Flex>
       <Stack gap="20px" py="20px" flexDirection="column">
         <Text>
           I'm a self-taught, full-stack developer from Texas. I've spent most of
@@ -31,5 +35,5 @@ export default function AboutPage() {
         </Text>
       </Stack>
     </Layout>
-  )
+  );
 }

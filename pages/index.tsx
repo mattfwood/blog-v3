@@ -3,10 +3,12 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import Link from 'next/link';
 import path from 'path';
+
 import Layout from '../components/Layout';
 import { postFilePaths, POSTS_PATH } from '../utils/mdxUtils';
-import { Box, Heading, Stack, Text } from 'minerva-ui';
+import { Box, Flex, Heading, Text } from 'minerva-ui';
 import { formatDate } from './posts/[slug]';
+import NowPlaying from '../components/NowPlaying';
 
 export default function Index({ posts }) {
   const sortedPosts = posts.sort((a, b) => {
@@ -14,7 +16,7 @@ export default function Index({ posts }) {
   });
   return (
     <Layout>
-      <Box mt="32px">
+      <Box my="32px">
         <Heading
           letterSpacing="tight"
           my="32px"
@@ -28,7 +30,7 @@ export default function Index({ posts }) {
         </Heading>
         {sortedPosts
           .filter(
-            (post) => process.env.NODE_ENV === 'development' || !post.draft
+            (post) => process.env.NODE_ENV === 'development' || !post.data.draft
           )
           .map((post) => {
             const description = post.data?.description || post?.data?.spoiler;
@@ -53,6 +55,9 @@ export default function Index({ posts }) {
               </Link>
             );
           })}
+        <Flex justifyContent="center">
+          <NowPlaying />
+        </Flex>
       </Box>
     </Layout>
   );
