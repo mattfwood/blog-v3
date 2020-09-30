@@ -1,7 +1,7 @@
 import { ThemeProvider, GlobalStyles, defaultTheme } from 'minerva-ui';
 import { MinervaTheme } from 'minerva-ui/dist/theme';
 import { DefaultSeo } from 'next-seo';
-import '../styles.css';
+// import '../styles.css';
 import SEO from '../next-seo.config';
 
 export const customTheme: MinervaTheme = {

@@ -43,8 +43,6 @@ export function formatDate(date: string): string {
 export default function PostPage({ source, frontMatter, readTime }) {
   const content = hydrate(source, { components });
 
-  console.log({ source, frontMatter });
-
   return (
     <Layout title={`${frontMatter.title} — Matt Wood`}>
       <div className="post-header">
@@ -57,15 +55,17 @@ export default function PostPage({ source, frontMatter, readTime }) {
         >
           {frontMatter.title}
         </Heading>
-        <Flex opacity={0.6} my={2}>
+        <Flex opacity={0.6} mt={2}>
           <Text>{formatDate(frontMatter.date)}</Text>
           <Text mx={2}>•</Text>
-          <Text mb={4}>{readTime.text}</Text>
+          <Text>{readTime.text}</Text>
         </Flex>
         <Image src={frontMatter?.banner} />
-        <Text fontSize="14px" my={2} textAlign="center">
-          <ReactMarkdown source={frontMatter.bannerCredit} />
-        </Text>
+        {Boolean(frontMatter?.bannerCredit) && (
+          <Text fontSize="14px" my={2} textAlign="center">
+            <ReactMarkdown source={frontMatter.bannerCredit} />
+          </Text>
+        )}
       </div>
       <main className="prose" style={{ marginBottom: '60px' }}>
         {content}
