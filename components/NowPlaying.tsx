@@ -61,7 +61,7 @@ const NowPlaying = () => {
             }}
             isExternal
           >
-            {data && (data?.song || 'Not Playing')}
+            {data?.song || 'Not Playing'}
           </Link>
           <Text
             color="gray.500"
@@ -71,9 +71,8 @@ const NowPlaying = () => {
             style={{
               margin: 0,
             }}
-            // textOverflow="ellipsis"
           >
-            {data && (data?.artist || 'Spotify')}
+            {data?.artist || 'Spotify'}
           </Text>
         </Stack>
 

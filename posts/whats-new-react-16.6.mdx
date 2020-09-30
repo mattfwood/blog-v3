@@ -10,7 +10,7 @@ tags:
 
 The [release of React's 16.6](https://reactjs.org/blog/2018/10/23/react-v-16-6.html) minor version bump came with some new React tools for React developers. Since it's a only a [minor version](https://semver.org/), React teams should feel comfortable upgrading because there aren't any breaking changes -- only new features and bugfixes.
 
-# [Context Type](https://reactjs.org/docs/context.html#classcontexttype)
+## [Context Type](https://reactjs.org/docs/context.html#classcontexttype)
 
 This is, in my opinion, the most exciting addition in 16.6.
 
@@ -58,7 +58,7 @@ class VoteCount extends Component {
 
 If you want to see an example in action, I [created this CodeSandbox](https://codesandbox.io/s/n560yp5xx4) to demonstrate how to use contextType.
 
-# [Memo](https://reactjs.org/docs/react-api.html#reactmemo)
+## [Memo](https://reactjs.org/docs/react-api.html#reactmemo)
 
 Although the name of this new API has been met with [mixed feedback](https://twitter.com/dan_abramov/status/1054930594143109120), the Memo API is essentially a wrapper / higher-order component that provides the benefits of a [Pure Component](https://reactjs.org/docs/react-api.html#reactpurecomponent) to function components.
 
@@ -100,7 +100,7 @@ const UserInfoMemo = React.memo((props) => {
 
 I created [this quick CodeSandbox](https://codesandbox.io/s/2x5z13y4p?expanddevtools=1) to demonstrate the differences. Type into the search input and notice how `UserInfoNormal` is actually re-rendering on every keystroke, even though the props aren't changing. Compare that to `UserInfoMemo`, which is only doing one initial render and not re-rendering when the main App component's state is changing.
 
-# [React.lazy code-splitting](https://reactjs.org/docs/code-splitting.html#reactlazy)
+## [React.lazy code-splitting](https://reactjs.org/docs/code-splitting.html#reactlazy)
 
 Now, just be warned, this is a feature “from the future” that’s mainly intended to set things up for the upcoming release of React Suspense. Also, this feature isn’t available for server-side rendering just yet, so don’t try and mix this into NextJS (which luckily does code-splitting by default, anyway).
 

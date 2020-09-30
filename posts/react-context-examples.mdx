@@ -15,7 +15,7 @@ In my personal usage, I've found it to be a great stand-in for state containers 
 
 For this example, let's say we have a simple dashboard app for managing blog posts.
 
-### Setup
+## Setup
 
 First, we'll create a simple Provider and Consumer pair.
 
@@ -55,7 +55,7 @@ In this case, "store" is just referring to the parent component, which works lik
 
 In my experience, I find this much easier to work with than something like Redux, where you usually need reducers and actions and a lot of other boilerplate.
 
-### Basic Usage
+## Basic Usage
 
 In the root of your app, usually `index.js`, put the `StoreProvider` component as high as possible.
 
@@ -91,7 +91,7 @@ const User = (props) => {
 }
 ```
 
-### Data Fetching
+## Data Fetching
 
 Instead of having to reach for [middleware](https://github.com/redux-saga/redux-saga), async data fetching with Context works just like it would in a normal component.
 
@@ -157,7 +157,7 @@ class StoreProvider extends Component {
 
 Make sure to pass your methods to your components as props, or else you won't be able to access your context's methods in the consumer.
 
-### Higher Order Component
+## Higher Order Component
 
 If you find it clunky / messy to do the whole [render prop](https://reactjs.org/docs/render-props.html) song and dance, you can append this [higher order component](https://reactjs.org/docs/higher-order-components.html) when you export your component.
 
