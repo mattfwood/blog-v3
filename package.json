@@ -13,7 +13,6 @@
     "@loadable/component": "^5.13.2",
     "date-fns": "^2.16.1",
     "gray-matter": "^4.0.2",
-    "husky": "^4.3.0",
     "mdx-utils": "^0.2.0",
     "minerva-ui": "^4.7.4",
     "next": "latest",
