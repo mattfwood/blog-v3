@@ -15,8 +15,6 @@ import fetcher from '../utils/fetcher';
 const NowPlaying = () => {
   const { data, error } = useSWR('/api/spotify', fetcher);
 
-  console.log({ data, error });
-
   return (
     <ThemeProvider theme={customTheme}>
       <Box

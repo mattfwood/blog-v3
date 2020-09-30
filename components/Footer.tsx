@@ -2,8 +2,6 @@ import React from 'react';
 import NextLink from 'next/link';
 import { Flex, Link, Button, Stack } from 'minerva-ui';
 
-import NowPlaying from './NowPlaying';
-
 const Footer = () => (
   <Flex as="footer" alignItems="center" mb="60px" flexDirection="column">
     <Stack horizontal mb={4}>
