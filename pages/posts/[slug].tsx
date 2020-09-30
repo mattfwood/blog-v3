@@ -42,6 +42,8 @@ export function formatDate(date: string): string {
 
 console.log('test');
 
+console.log('test2');
+
 export default function PostPage({ source, frontMatter, readTime }) {
   const content = hydrate(source, { components });
 
