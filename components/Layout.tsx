@@ -1,5 +1,6 @@
 import { Box, Button, Flex } from 'minerva-ui';
 import Link from 'next/link';
+import Footer from './Footer';
 import { GlobalStyle } from './GlobalStyle';
 import SEO from './SEO';
 
@@ -44,6 +45,7 @@ export default function Layout({ children, ...props }) {
       <div className="wrapper">
         <Navigation />
         {children}
+        <Footer />
       </div>
       <GlobalStyle />
     </>

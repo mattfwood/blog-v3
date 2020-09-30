@@ -1,4 +1,4 @@
-export default async function fetcher(params: any) {
+export default async function fetcher(...params: any) {
   // @ts-ignore
   const res = await fetch(...params);
 
