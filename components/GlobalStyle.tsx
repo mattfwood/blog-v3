@@ -42,7 +42,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .wrapper {
-    max-width: 700px;
+    max-width: 720px;
     margin: 0 auto;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
