@@ -8,7 +8,7 @@ import {
   ThemeProvider,
 } from 'minerva-ui';
 import useSWR from 'swr';
-import { customTheme } from '../pages/_app';
+import { customTheme } from '../utils/customTheme';
 import fetcher from '../utils/fetcher';
 
 const ART_SIZE = '80px';

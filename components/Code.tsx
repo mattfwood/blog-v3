@@ -5,7 +5,7 @@ import theme from 'prism-react-renderer/themes/nightOwl';
 
 import Copy from './Copy';
 import { Box, styled, ThemeProvider } from 'minerva-ui';
-import { customTheme } from '../pages/_app';
+import { customTheme } from '../utils/customTheme';
 
 export type Language =
   | 'markup'
