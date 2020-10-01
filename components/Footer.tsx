@@ -44,7 +44,7 @@ const Footer = () => (
     <Stack horizontal>
       <NextLink href="/uses" passHref>
         {/* @ts-ignore */}
-        <Link fontSize="16px" color="gray.500" title="Uses">
+        <Link fontSize="16px" color="rgb(160, 174, 192)" title="Uses">
           /uses
         </Link>
       </NextLink>

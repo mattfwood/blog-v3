@@ -17,6 +17,8 @@ const NowPlaying = () => {
   const { data, error } = useSWR('/api/spotify', fetcher);
 
   const isLoaded = Boolean(data) && !error;
+  const isPlaying = Boolean(data?.song);
+
   return (
     <ThemeProvider theme={customTheme}>
       <Box
@@ -52,7 +54,7 @@ const NowPlaying = () => {
           flexDirection="column"
           ml={3}
         >
-          {isLoaded ? (
+          {isLoaded && isPlaying && (
             <Link
               // @ts-ignore
               color="rgb(255, 255, 255)"
@@ -69,11 +71,13 @@ const NowPlaying = () => {
             >
               {data?.song || 'Not Playing'}
             </Link>
-          ) : (
-            <SkeletonItem />
+          )}
+          {!isLoaded && <SkeletonItem />}
+          {isLoaded && !isPlaying && (
+            <Text color="rgb(255, 255, 255)">Not Playing</Text>
           )}
           <Text
-            color="gray.500"
+            color="rgb(160, 174, 192)"
             maxWidth="190px"
             whiteSpace="nowrap"
             overflow="hidden"
