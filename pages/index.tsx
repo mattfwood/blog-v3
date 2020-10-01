@@ -56,7 +56,7 @@ export default function Index({ posts }) {
                   <Text opacity={0.6} fontSize="14px" mb="8px">
                     {formatDate(post.data.date)}
                   </Text>
-                  <Heading as="h3">{post.data.title}</Heading>
+                  <Heading as="h2">{post.data.title}</Heading>
                   {!!description && (
                     <Text mt="8px" color="rgb(160, 174, 192)">
                       {description}
