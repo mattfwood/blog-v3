@@ -14,6 +14,7 @@ export const customTheme: MinervaTheme = {
     color: 'rgb(255, 255, 255)',
     lineHeight: 1.25,
   },
+  icons: {},
 };
 
 export default function MyApp({ Component, pageProps }) {

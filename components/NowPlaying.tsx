@@ -44,8 +44,6 @@ const NowPlaying = () => {
         ) : (
           <SkeletonItem width={ART_SIZE} height={ART_SIZE} borderRadius={8} />
         )}
-        {/* <Skeleton>
-      </Skeleton> */}
         <Stack
           gap="0px"
           justifyContent="center"
