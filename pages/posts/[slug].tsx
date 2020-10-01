@@ -7,28 +7,18 @@ import ReactMarkdown from 'react-markdown';
 
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-// import Link from 'next/link';
 import path from 'path';
-// import CustomLink from '../../components/CustomLink';
 import Layout from '../../components/Layout';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
 import { Flex, Heading, Image, Text } from 'minerva-ui';
 import { formatDate } from '../../utils/dates';
-// import BodyContent from '../../components/BodyContent';
 
 const Code = dynamic(() => import('../../components/Code'));
+const BodyContent = dynamic(() => import('../../components/BodyContent'));
 
 const readingTime = require('reading-time');
 
-// Custom components/renderers to pass to MDX.
-// Since the MDX files aren't loaded by webpack, they have no knowledge of how
-// to handle import statements. Instead, you must include components in scope
-// here.
 const components = {
-  // a: CustomLink,
-  // It also works with dynamically-imported components, which is especially
-  // useful for conditionally loading components for certain routes.
-  // See the notes in README.md for more details.
   Head,
   // eslint-disable-next-line
   pre: (preProps) => {
@@ -66,9 +56,11 @@ export default function PostPage({ source, frontMatter, readTime }) {
           </Text>
         )}
       </div>
-      <main className="prose" style={{ marginBottom: '60px' }}>
-        {content}
-      </main>
+      <BodyContent>
+        <div className="prose" style={{ marginBottom: '60px' }}>
+          {content}
+        </div>
+      </BodyContent>
     </Layout>
   );
 }
