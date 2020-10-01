@@ -1,7 +1,7 @@
-import { ThemeProvider, GlobalStyles, defaultTheme } from 'minerva-ui';
+import { ThemeProvider, CSSReset, defaultTheme } from 'minerva-ui';
 import { MinervaTheme } from 'minerva-ui/dist/theme';
 import { DefaultSeo } from 'next-seo';
-// import '../styles.css';
+import { createGlobalStyle } from 'styled-components';
 import SEO from '../next-seo.config';
 
 export const customTheme: MinervaTheme = {
@@ -17,11 +17,15 @@ export const customTheme: MinervaTheme = {
   icons: {},
 };
 
+const CSSResetStyles = createGlobalStyle`
+  ${CSSReset}
+`;
+
 export default function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={customTheme}>
       <DefaultSeo {...SEO} />
-      <GlobalStyles />
+      <CSSResetStyles />
       <Component {...pageProps} />
     </ThemeProvider>
   );

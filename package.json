@@ -14,7 +14,7 @@
     "date-fns": "^2.16.1",
     "gray-matter": "^4.0.2",
     "mdx-utils": "^0.2.0",
-    "minerva-ui": "^4.7.6",
+    "minerva-ui": "^4.7.7",
     "next": "latest",
     "next-mdx-remote": "^1.0.0",
     "next-remote-watch": "0.2.0",

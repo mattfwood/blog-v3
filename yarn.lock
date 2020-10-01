@@ -5874,10 +5874,10 @@ min-indent@^1.0.0:
   resolved "https://registry.yarnpkg.com/min-indent/-/min-indent-1.0.1.tgz#a63f681673b30571fbe8bc25686ae746eefa9869"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
-minerva-ui@^4.7.6:
-  version "4.7.6"
-  resolved "https://registry.yarnpkg.com/minerva-ui/-/minerva-ui-4.7.6.tgz#696e61dda967c9fcbee369e3e5e622a733b4a685"
-  integrity sha512-eEtoU9qz1toUkxoFRJP67B3I+FIRKTTfKEVty6kM+U5dS6noN4NBolmvzMMWVzW/xt51FAqh4ooN6blJhqIN0w==
+minerva-ui@^4.7.7:
+  version "4.7.7"
+  resolved "https://registry.yarnpkg.com/minerva-ui/-/minerva-ui-4.7.7.tgz#79654c361646ae186159e3112af43da8e686cb0d"
+  integrity sha512-Q3tzIo5Bn9yEE64Eu57zRWWFGcR8o77ca2ExbY6EymfqxWdSOJMmUtbE9NW4suYAHmHLmHwnOgvVe++hgDfx4Q==
   dependencies:
     "@mdx-js/react" "^1.5.1"
     "@reach/accordion" "^0.10.1"
