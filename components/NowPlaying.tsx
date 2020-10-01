@@ -52,22 +52,26 @@ const NowPlaying = () => {
           flexDirection="column"
           ml={3}
         >
-          <Link
-            // @ts-ignore
-            color="rgb(255, 255, 255)"
-            maxWidth="180px"
-            whiteSpace="nowrap"
-            overflow="hidden"
-            textOverflow="ellipsis"
-            href={data?.url}
-            _hover={{
-              color: 'rgb(255, 255, 255)',
-              textDecoration: 'underline',
-            }}
-            isExternal
-          >
-            {isLoaded && (data?.song || 'Not Playing')}
-          </Link>
+          {isLoaded ? (
+            <Link
+              // @ts-ignore
+              color="rgb(255, 255, 255)"
+              maxWidth="180px"
+              whiteSpace="nowrap"
+              overflow="hidden"
+              textOverflow="ellipsis"
+              href={data?.url}
+              _hover={{
+                color: 'rgb(255, 255, 255)',
+                textDecoration: 'underline',
+              }}
+              isExternal
+            >
+              {data?.song || 'Not Playing'}
+            </Link>
+          ) : (
+            <SkeletonItem />
+          )}
           <Text
             color="gray.500"
             maxWidth="190px"

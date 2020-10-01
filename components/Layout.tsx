@@ -45,6 +45,7 @@ export default function Layout({ children, ...props }) {
       <SEO {...props} />
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="canonical" href="https://matthewfwood.com" />
       </Head>
       <div className="wrapper">
         <Navigation />
