@@ -13,8 +13,10 @@ import Layout from '../components/Layout';
 import { contentFilePaths, CONTENT_PATH } from '../utils/mdxUtils';
 import { Flex, Heading } from 'minerva-ui';
 import NowPlaying from '../components/NowPlaying';
-import RecentlyPlayed from '../components/RecentlyPlayed';
+import dynamic from 'next/dynamic';
 // import BodyContent from '../../components/BodyContent';
+
+const RecentlyPlayed = dynamic(() => import('../components/RecentlyPlayed'));
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how

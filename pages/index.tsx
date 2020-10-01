@@ -3,12 +3,14 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import Link from 'next/link';
 import path from 'path';
+import dynamic from 'next/dynamic';
 
 import Layout from '../components/Layout';
 import { postFilePaths, POSTS_PATH } from '../utils/mdxUtils';
 import { Box, Button, Flex, Heading, Text } from 'minerva-ui';
-import NowPlaying from '../components/NowPlaying';
 import { formatDate } from '../utils/dates';
+
+const NowPlaying = dynamic(() => import('../components/NowPlaying'));
 
 const POST_INCREMENT = 5;
 
