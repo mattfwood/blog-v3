@@ -1,4 +1,5 @@
-import { ThemeProvider, CSSReset } from 'minerva-ui';
+import { CSSReset } from 'minerva-ui';
+import { ThemeProvider } from 'styled-components';
 import { DefaultSeo } from 'next-seo';
 import { createGlobalStyle } from 'styled-components';
 import SEO from '../next-seo.config';

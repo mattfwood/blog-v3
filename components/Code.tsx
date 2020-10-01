@@ -4,7 +4,8 @@ import loadable from '@loadable/component';
 import theme from 'prism-react-renderer/themes/nightOwl';
 
 import Copy from './Copy';
-import { Box, styled, ThemeProvider } from 'minerva-ui';
+import { Box, styled } from 'minerva-ui';
+import { ThemeProvider } from 'styled-components';
 import { customTheme } from '../utils/customTheme';
 
 export type Language =
