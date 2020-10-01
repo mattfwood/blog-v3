@@ -17,6 +17,7 @@ import dynamic from 'next/dynamic';
 // import BodyContent from '../../components/BodyContent';
 
 const RecentlyPlayed = dynamic(() => import('../components/RecentlyPlayed'));
+const BodyContent = dynamic(() => import('../components/BodyContent'));
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
@@ -50,9 +51,11 @@ export default function PostPage({ source, frontMatter }) {
           {frontMatter.title}
         </Heading>
       </div>
-      <main className="prose" style={{ marginBottom: '20px' }}>
-        {content}
-      </main>
+      <BodyContent>
+        <div className="prose" style={{ marginBottom: '20px' }}>
+          {content}
+        </div>
+      </BodyContent>
       {frontMatter.title === 'About' ? (
         <RecentlyPlayed />
       ) : (
