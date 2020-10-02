@@ -5,7 +5,7 @@ import { Flex, Link, Button, Stack } from 'minerva-ui';
 const Footer = () => (
   <Flex as="footer" alignItems="center" mb="60px" flexDirection="column">
     <Stack horizontal mb={4}>
-      <Link href="https://github.com/matthewfwood" isExternal>
+      <Link href="https://github.com/mattfwood" isExternal>
         <Button
           height="3rem"
           minWidth="3rem"

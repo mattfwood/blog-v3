@@ -28,21 +28,6 @@ const RecentlyPlayed = () => {
               borderRadius={8}
               src={song?.album_art || '/images/spotify-placeholder.jpg'}
             />
-            {/* {isLoaded ? (
-              <Image
-                alt="Spotify album cover"
-                height={ART_SIZE}
-                width={ART_SIZE}
-                borderRadius={8}
-                src={song?.album_art || '/images/spotify-placeholder.jpg'}
-              />
-            ) : (
-              <SkeletonItem
-                width={ART_SIZE}
-                height={ART_SIZE}
-                borderRadius={8}
-              />
-            )} */}
             <Stack
               gap="0px"
               justifyContent="center"
@@ -68,7 +53,7 @@ const RecentlyPlayed = () => {
                 {isLoaded && (song?.song || 'Not Playing')}
               </Link>
               <Text
-                color="gray.500"
+                color="rgb(160, 174, 192)"
                 maxWidth="190px"
                 whiteSpace="nowrap"
                 overflow="hidden"
@@ -80,7 +65,7 @@ const RecentlyPlayed = () => {
                 {isLoaded && (song?.artist || 'Spotify')}
               </Text>
               <Text
-                color="gray.500"
+                color="rgb(160, 174, 192)"
                 maxWidth="190px"
                 whiteSpace="nowrap"
                 overflow="hidden"
