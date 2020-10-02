@@ -5,6 +5,8 @@ require('dotenv').config({
   path: path.join(__dirname, '..', '.env'),
 });
 
+// const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks`;
+
 const {
   SPOTIFY_CLIENT_ID,
   SPOTIFY_CLIENT_SECRET,
@@ -21,6 +23,8 @@ const HOST = 'http://localhost:3000';
 //   'user-read-currently-playing',
 //   'user-read-playback-state',
 //   'user-read-recently-played',
+//   'user-top-read',
+//   'user-library-read',
 // ];
 
 export async function initSpotify() {

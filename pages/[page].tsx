@@ -16,7 +16,7 @@ import NowPlaying from '../components/NowPlaying';
 import dynamic from 'next/dynamic';
 // import BodyContent from '../../components/BodyContent';
 
-const RecentlyPlayed = dynamic(() => import('../components/RecentlyPlayed'));
+const TopTracks = dynamic(() => import('../components/TopTracks'));
 const BodyContent = dynamic(() => import('../components/BodyContent'));
 
 // Custom components/renderers to pass to MDX.
@@ -57,7 +57,7 @@ export default function PostPage({ source, frontMatter }) {
         </div>
       </BodyContent>
       {frontMatter.title === 'About' ? (
-        <RecentlyPlayed />
+        <TopTracks />
       ) : (
         <Flex justifyContent="center">
           <NowPlaying />
