@@ -6,11 +6,6 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
-  :root {
-    --site-color: royalblue;
-    --divider-color: rgba(0, 0, 0, 0.4);
-  }
-
   html {
     font: 100%/1.5 system-ui;
     background-color: rgb(23, 25, 35);
@@ -18,14 +13,12 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: inherit;
-    text-decoration-color: var(--divider-color);
-    text-decoration-thickness: 2px;
+    color: rgb(96, 179, 251);
+    text-decoration: none !important;
   }
 
   a:hover {
-    color: var(--site-color);
-    text-decoration-color: currentcolor;
+    text-decoration: underline !important;
   }
 
   h1 {
