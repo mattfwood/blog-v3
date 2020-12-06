@@ -1,10 +1,11 @@
 ---
 title: Getting The Most out of Typescript
 description: Maximize your typechecking 
-date: '2020-11-26'
+date: '2020-11-26’
+draft: true
 ---
 
-If you're an uninitiated JavaScript developer, reading through an large Typescript codebase can be intimidating.
+If you're an uninitiated JavaScript developer, reading through a large Typescript codebase can be intimidating.
 
 And unfortunately, this might scare many away from giving it a try.
 
@@ -14,7 +15,7 @@ Almost all of the popular NPM packages you either have types included or have co
 
 With that in mind, let's go through the "easy wins" you can use to get the most out of typescript.
 
-## Text Editor 
+## Utilize Your Text Editor 
 
 [typescript + VS Code Trojan horse image]
 
@@ -24,5 +25,23 @@ The biggest thing to use is "intellisense". You probably already use it, but whe
 
 This can help with built-in methods (like calling .replace on a string) but also help explore methods for external libraries. 
 
-And if you need more information about a method, you can mouse over a method or variable to see the types and possibly the documentation for the method included by the library. If you're lucky, it might even include a link to a section of their documentation or an example. 
+And if you need more information about a method, you can mouse over a method or variable to see the types and possibly the documentation for the method included by the library.
+
+If you're lucky, it might even include a link to a section of their documentation or an example.
+
+And if you’re writing your own functions, VS Code is really good at inferring types based on your usage. 
+
+## Don’t be afraid to use “any” (at first)
+
+Something that can easily frustrate people who start to use Typescript is defining types before you’ve finalized a function.
+
+Instead, if you’re starting to write a function and running into Typescript errors, just set the type to “any”.
+
+Personally, I’ve found that adding types too early ends up creating more upkeep without much benefit.
+
+Once a function or API has been settled, you can think through the types and allow them to help document your code.
+
+## When in doubt, reference other code
+
+
 
