@@ -1,0 +1,3 @@
+- Spotify Integration Guide
+- Creating a Blog Guide
+- React Anti-Patterns
