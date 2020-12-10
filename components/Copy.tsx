@@ -53,6 +53,7 @@ const Copy = ({
     : `${fileName ? `${fileName}: ` : ``}copy code to clipboard`;
 
   return (
+    // @ts-ignore
     <Button
       type="button"
       position="absolute"
