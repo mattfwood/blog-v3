@@ -47,11 +47,12 @@ const TopTracks = () => {
               ml={3}
             >
               <Link
-                // @ts-ignore
+                as="a"
                 color="rgb(255, 255, 255)"
                 maxWidth="180px"
                 whiteSpace="nowrap"
                 overflow="hidden"
+                // @ts-ignore
                 textOverflow="ellipsis"
                 fontWeight={600}
                 href={song?.url}

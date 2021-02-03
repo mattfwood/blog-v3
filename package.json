@@ -54,13 +54,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && npx tsc --noEmit"
     }
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix --cache",
-      "tsc --noEmit"
+      "eslint --fix --cache"
     ]
   }
 }

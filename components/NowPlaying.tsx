@@ -44,11 +44,12 @@ const NowPlaying = () => {
       >
         {isLoaded && isPlaying && (
           <Link
-            // @ts-ignore
+            as="a"
             color="rgb(255, 255, 255)"
             maxWidth="180px"
             whiteSpace="nowrap"
             overflow="hidden"
+            // @ts-ignore
             textOverflow="ellipsis"
             href={data?.url}
             _hover={{

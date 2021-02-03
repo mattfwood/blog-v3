@@ -10,7 +10,7 @@ import Head from 'next/head';
 import path from 'path';
 import Layout from '../../components/Layout';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
-import { Flex, Heading, Image, Text } from 'minerva-ui';
+import { Flex, Heading, Text } from 'minerva-ui';
 import { formatDate } from '../../utils/dates';
 
 const Code = dynamic(() => import('../../components/Code'));
@@ -48,7 +48,7 @@ export default function PostPage({ source, frontMatter, readTime }) {
           <Text>{readTime.text}</Text>
         </Flex>
         {Boolean(frontMatter?.banner) && (
-          <Image src={frontMatter?.banner} alt={frontMatter?.bannerCredit} />
+          <img src={frontMatter?.banner} alt={frontMatter?.bannerCredit} />
         )}
         {Boolean(frontMatter?.bannerCredit) && (
           <Text fontSize="14px" my={2} textAlign="center">
