@@ -17,9 +17,9 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none !important;
   }
 
-  a:hover {
+  /* a:hover {
     text-decoration: underline !important;
-  }
+  } */
 
   h1 {
     font-size: 48px;
