@@ -8,6 +8,7 @@ import SEO from './SEO';
 const NavLink = ({ children, href, ...props }) => (
   <Link passHref href={href} {...props}>
     <Button
+      as="a"
       bg="transparent"
       color="white"
       border={0}

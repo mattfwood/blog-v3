@@ -1,0 +1,42 @@
+---
+title: Typescript Const Assertions ("as const"), Explained
+description:
+date: '2021-09-15'
+draft: true
+---
+
+Typescript, for all its benefits, isn't the best at making its utilities well known.
+
+One Typescript trick I wish I'd known about much sooner is ["`const` assertions".](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions)
+
+Const assertions, as the name implies, are a way to "lock in" the type of an object that you don't expect to change.
+
+By default, if you create an object, Typescript will give fairly loose type definitions for each value:
+
+<Image alt="typescript metadata example" src="/images/typescript-const-example-1.png" height={165} width={305} />
+
+However, if you know that these values won't change, it can be more helpful to use `const` to lock in the type.
+
+<Image alt="typescript metadata example" src="/images/typescript-const-example-2.png" height={168} width={436} />
+
+This does a few things:
+
+1. It makes all of the properties `readonly`, so that they can't accidentally be changed.
+2. It prevents you from doing checks that would be impossible
+
+```typescript
+const metadata = {
+    title: "Matt's Blog",
+    description: 'This is a blog, I guess'
+} as const;
+
+// the following line will return:
+/*
+This condition will always return 'false'
+since the types '"Matt's Blog"' and '"Some other title"'
+have no overlap.(2367)
+*/
+if (metadata.title === 'Some other title') {
+    alert('This should not be possible');
+}
+```

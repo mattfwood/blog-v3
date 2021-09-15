@@ -8,9 +8,10 @@ import ReactMarkdown from 'react-markdown';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import path from 'path';
+import Image from 'next/image';
 import Layout from '../../components/Layout';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
-import { Flex, Heading, Text } from 'minerva-ui';
+import { Box, Flex, Heading, Text } from 'minerva-ui';
 import { formatDate } from '../../utils/dates';
 
 const Code = dynamic(() => import('../../components/Code'));
@@ -25,6 +26,13 @@ const components = {
     const props = preToCodeBlock(preProps);
     return <Code {...props} />;
   },
+  Box,
+  // eslint-disable-next-line
+  Image: (props) => (
+    <Box display="flex" justifyContent="center" pb={4}>
+      <Image className="next-img" {...props} />
+    </Box>
+  ),
 };
 
 export default function PostPage({ source, frontMatter, readTime }) {

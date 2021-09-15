@@ -357,6 +357,11 @@ const BodyContent = styled.main`
   .prose > :last-child {
     margin-bottom: 0;
   }
+
+  /* override images when using next <Image /> component */
+  .prose .next-img {
+    margin: 0 !important;
+  }
 `;
 
 export default BodyContent;
